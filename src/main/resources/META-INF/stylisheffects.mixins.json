@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "compatibilityLevel": "JAVA_16",
+  "package": "fuzs.stylisheffects.mixin",
+  "refmap": "META-INF/stylisheffects.refmap.json",
+  "mixins": [
+    "compat.DefaultPotionEffectExclusionZonesMixin"
+  ],
+  "client": [
+    "client.EffectRenderingInventoryScreenMixin",
+    "client.GuiMixin",
+    "client.accessor.AbstractContainerScreenAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
