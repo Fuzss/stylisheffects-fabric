@@ -5,12 +5,12 @@
   "package": "fuzs.stylisheffects.mixin",
   "refmap": "META-INF/stylisheffects.refmap.json",
   "mixins": [
-    "compat.DefaultPotionEffectExclusionZonesMixin"
   ],
   "client": [
     "client.EffectRenderingInventoryScreenMixin",
     "client.GuiMixin",
-    "client.accessor.AbstractContainerScreenAccessor"
+    "client.accessor.AbstractContainerScreenAccessor",
+    "compat.DefaultPotionEffectExclusionZonesMixin"
   ],
   "injectors": {
     "defaultRequire": 1
