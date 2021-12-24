@@ -3,14 +3,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog].
 
-## [v2.0.1-1.17.1] - 2021-11-22
-### Fixed
-- Fixed an issue where a REI client-only class would be attempted to be loaded on dedicated servers
-
-## [v2.0.0-1.17.1] - 2021-11-20
-- Ported to Fabric for Minecraft 1.17
-- Requires [Puzzles Lib]
-
+## [v3.0.0-1.18.1] - 2021-12-24
+- Ported to Fabric for Minecraft 1.18
 
 [Keep a Changelog]: https://keepachangelog.com/en/1.0.0/
-[Puzzles Lib]: https://www.curseforge.com/minecraft/mc-mods/puzzles-lib-fabric
