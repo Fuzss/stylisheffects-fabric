@@ -8,8 +8,7 @@ import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
 public class StylishEffectsClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        ScreenEvents.AFTER_INIT.register(EffectScreenHandler.INSTANCE::onInitGuiPost);
-        EffectScreenHandler.INSTANCE.createEffectRenderers();
-        StylishEffects.CONFIG.addClientCallback(EffectScreenHandler.INSTANCE::createEffectRenderers);
+        EffectScreenHandler.INSTANCE.createHudRenderer();
+        StylishEffects.CONFIG.addClientCallback(EffectScreenHandler.INSTANCE::createHudRenderer);
     }
 }

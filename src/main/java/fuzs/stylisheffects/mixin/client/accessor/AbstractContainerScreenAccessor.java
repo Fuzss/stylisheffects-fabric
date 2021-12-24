@@ -8,10 +8,13 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 public interface AbstractContainerScreenAccessor {
     @Accessor("imageWidth")
     int getXSize();
+
     @Accessor("imageHeight")
     int getYSize();
+
     @Accessor("leftPos")
     int getGuiLeft();
+
     @Accessor("topPos")
     int getGuiTop();
 }

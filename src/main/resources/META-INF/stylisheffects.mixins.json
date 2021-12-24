@@ -7,8 +7,10 @@
   "mixins": [
   ],
   "client": [
+    "client.AbstractContainerScreenMixin",
     "client.EffectRenderingInventoryScreenMixin",
     "client.GuiMixin",
+    "client.accessor.AbstractContainerMenuAccessor",
     "client.accessor.AbstractContainerScreenAccessor",
     "compat.DefaultPotionEffectExclusionZonesMixin"
   ],

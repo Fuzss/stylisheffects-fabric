@@ -17,15 +17,9 @@ public abstract class EffectRenderingInventoryScreenMixin<T extends AbstractCont
         super(abstractContainerMenu, inventory, component);
     }
 
-    @Inject(method = "checkEffectRendering", at = @At("HEAD"), cancellable = true)
-    protected void checkEffectRendering(CallbackInfo callbackInfo) {
-        // prevent screen from shifting when potion effects are active
-        callbackInfo.cancel();
-    }
-
     @Inject(method = "renderEffects", at = @At("HEAD"), cancellable = true)
-    private void renderEffects(PoseStack poseStack, CallbackInfo callbackInfo) {
-        // cancel vanilla effect rendering, we use screen effects for our rendering as we're not just targeting EffectRenderingInventoryScreen's
+    private void renderEffects(PoseStack poseStack, int mouseX, int mouseY, CallbackInfo callbackInfo) {
+        // cancel vanilla effect rendering, we use screen events for our rendering as we're not just targeting instances of EffectRenderingInventoryScreen
         callbackInfo.cancel();
     }
 }

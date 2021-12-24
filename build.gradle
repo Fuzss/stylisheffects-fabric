@@ -7,8 +7,8 @@ plugins {
 	id 'java-library'
 }
 
-sourceCompatibility = JavaVersion.VERSION_16
-targetCompatibility = JavaVersion.VERSION_16
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 
 ext.mcversion = "${minecraftVersion}"
@@ -35,10 +35,8 @@ dependencies {
 
 	modImplementation "net.fabricmc:fabric-loader:${project.fabricVersion}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabricApiVersion}"
-	modImplementation "com.terraformersmc:modmenu:2.0.12"
-
-//	modCompileOnly "me.shedaniel:RoughlyEnoughItems-api-fabric:6.1.331"
-	modImplementation "me.shedaniel:RoughlyEnoughItems-fabric:6.1.331"
+	modImplementation "com.terraformersmc:modmenu:3.0.0"
+	modImplementation "me.shedaniel:RoughlyEnoughItems-fabric:7.0.346"
 
 	// from local maven
 	modImplementation "fuzs.puzzleslib:PuzzlesLib:${puzzlesVersion}"
@@ -109,7 +107,7 @@ tasks.withType(JavaCompile).configureEach {
 	// If Javadoc is generated, this must be specified in that task too.
 	it.options.encoding = "UTF-8"
 	// Minecraft 1.17 (21w19a) upwards uses Java 16.
-	it.options.release = 16
+	it.options.release = 17
 }
 
 javadoc {
