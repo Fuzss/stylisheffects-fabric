@@ -92,7 +92,7 @@ public class ClientConfig extends AbstractConfig {
     }
 
     public static abstract class EffectRendererConfig extends AbstractConfig {
-        @Config(description = "Effect renderer to be used.")
+        @Config(description = {"Effect renderer to be used.", "This setting might not be respected when not enough screen space is available. To force this setting disable \"allow_fallback\"."})
         public EffectScreenHandler.EffectRenderer rendererType = EffectScreenHandler.EffectRenderer.COMPACT;
         @Config(description = "Maximum amount of status effects rendered in a single row.")
         @Config.IntRange(min = 1, max = 255)

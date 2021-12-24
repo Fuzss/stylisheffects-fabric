@@ -10,7 +10,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(Gui.class)
+// lower priority for bedrockify mod compat, otherwise our renderer doesn't work at all as they cancel the method too
+@Mixin(value = Gui.class, priority = 900)
 public abstract class GuiMixin extends GuiComponent {
     @Shadow
     private int screenWidth;

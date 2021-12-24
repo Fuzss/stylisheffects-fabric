@@ -1,14 +1,13 @@
 package fuzs.stylisheffects.client.handler;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import fuzs.puzzleslib.client.gui.screens.Screens;
 import fuzs.stylisheffects.StylishEffects;
 import fuzs.stylisheffects.client.gui.effects.AbstractEffectRenderer;
 import fuzs.stylisheffects.client.gui.effects.CompactEffectRenderer;
 import fuzs.stylisheffects.client.gui.effects.VanillaEffectRenderer;
 import fuzs.stylisheffects.config.ClientConfig;
 import fuzs.stylisheffects.mixin.client.accessor.AbstractContainerMenuAccessor;
-import fuzs.stylisheffects.mixin.client.accessor.AbstractContainerScreenAccessor;
-import net.fabricmc.fabric.api.client.screen.v1.Screens;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -66,7 +65,7 @@ public class EffectScreenHandler {
         final AbstractEffectRenderer inventoryRenderer = createRendererOrFallback(screen);
         if (inventoryRenderer == null) return;
         if (inventoryRenderer.isActive()) {
-            inventoryRenderer.renderEffects(poseStack, Screens.getClient(screen));
+            inventoryRenderer.renderEffects(poseStack, Screens.getMinecraft(screen));
             inventoryRenderer.getHoveredEffectTooltip(mouseX, mouseY).ifPresent(tooltip -> {
                 screen.renderComponentTooltip(poseStack, tooltip, mouseX, mouseY);
             });
@@ -97,11 +96,10 @@ public class EffectScreenHandler {
         final EffectRenderer rendererType = StylishEffects.CONFIG.client().inventoryRenderer().rendererType;
         if (rendererType.isEnabled() && supportsEffectsDisplay(screen)) {
             final AbstractContainerScreen<?> containerScreen = (AbstractContainerScreen<?>) screen;
-            AbstractContainerScreenAccessor accessor = (AbstractContainerScreenAccessor) containerScreen;
             final ClientConfig.ScreenSide screenSide = StylishEffects.CONFIG.client().inventoryRenderer().screenSide;
             Consumer<AbstractEffectRenderer> setScreenDimensions = renderer -> {
-                // names same as Forge
-                renderer.setScreenDimensions(containerScreen, !screenSide.right() ? accessor.getGuiLeft() : containerScreen.width - (accessor.getGuiLeft() + accessor.getXSize()), accessor.getYSize(), !screenSide.right() ? accessor.getGuiLeft() : accessor.getGuiLeft() + accessor.getXSize(), accessor.getGuiTop(), screenSide);
+                final int leftPos = Screens.getLeftPos(containerScreen);
+                renderer.setScreenDimensions(containerScreen, !screenSide.right() ? leftPos : containerScreen.width - (leftPos + Screens.getImageWidth(containerScreen)), Screens.getImageHeight(containerScreen), !screenSide.right() ? leftPos : leftPos + Screens.getImageWidth(containerScreen), Screens.getTopPos(containerScreen), screenSide);
             };
             AbstractEffectRenderer renderer = rendererType.create(AbstractEffectRenderer.EffectRendererType.INVENTORY);
             setScreenDimensions.accept(renderer);
@@ -109,7 +107,7 @@ public class EffectScreenHandler {
                 renderer = renderer.getFallbackRenderer().apply(AbstractEffectRenderer.EffectRendererType.INVENTORY);
                 setScreenDimensions.accept(renderer);
             }
-            renderer.setActiveEffects(Screens.getClient(screen).player.getActiveEffects());
+            renderer.setActiveEffects(Screens.getMinecraft(screen).player.getActiveEffects());
             return renderer;
         }
         return null;
