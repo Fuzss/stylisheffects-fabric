@@ -14,6 +14,7 @@ import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.EffectRenderingInventoryScreen;
 import net.minecraft.client.gui.screens.recipebook.RecipeUpdateListener;
 import net.minecraft.world.inventory.MenuType;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
@@ -105,6 +106,7 @@ public class EffectScreenHandler {
             setScreenDimensions.accept(renderer);
             while (!renderer.isValid()) {
                 renderer = renderer.getFallbackRenderer().apply(AbstractEffectRenderer.EffectRendererType.INVENTORY);
+                if (renderer == null) return null;
                 setScreenDimensions.accept(renderer);
             }
             renderer.setActiveEffects(Screens.getMinecraft(screen).player.getActiveEffects());
@@ -124,7 +126,7 @@ public class EffectScreenHandler {
             this.factory = factory;
         }
 
-        @Nullable
+        @NotNull
         public AbstractEffectRenderer create(AbstractEffectRenderer.EffectRendererType type) {
             return this.factory.apply(type);
         }
