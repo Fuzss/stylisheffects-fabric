@@ -5,19 +5,19 @@ import fuzs.puzzleslib.config.ConfigHolder;
 import fuzs.puzzleslib.config.ConfigHolderImpl;
 import fuzs.stylisheffects.config.ClientConfig;
 import net.fabricmc.api.ModInitializer;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class StylishEffects implements ModInitializer {
-    public static final String MODID = "stylisheffects";
-    public static final String NAME = "Stylish Effects";
-    public static final Logger LOGGER = LogManager.getLogger(NAME);
+    public static final String MOD_ID = "stylisheffects";
+    public static final String MOD_NAME = "Stylish Effects";
+    public static final Logger LOGGER = LoggerFactory.getLogger(MOD_NAME);
 
     @SuppressWarnings("Convert2MethodRef")
     public static final ConfigHolder<ClientConfig, AbstractConfig> CONFIG = ConfigHolder.client(() -> new ClientConfig());
 
     @Override
     public void onInitialize() {
-        ((ConfigHolderImpl<?, ?>) CONFIG).addConfigs(MODID);
+        ((ConfigHolderImpl<?, ?>) CONFIG).addConfigs(MOD_ID);
     }
 }
